@@ -1,0 +1,30 @@
+ body {
+        margin: 0;
+        padding: 0;
+      }
+      h2{
+            margin: 10px;
+            font-size: 1.2em;
+        }
+      .map-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            margin-right: 20px;
+            font-family: Arial, sans-serif;
+            overflow: auto;
+            border-radius: 3px;
+        }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      #timeseries{
+            bottom: 0;
+            width:100%;
+            height: 200px;
+            background-color: rgba(0,0,0,0);
+       } 

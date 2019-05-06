@@ -8,10 +8,20 @@
   	     bottom:0; 
   	     width:100%; 
   	 }
+
   #timeseries{
+          position: absolute;
+          bottom: 0;
+          left:0;
+          width:70%;
+          height: 200px;
+          background-color: rgba(0,0,0,0);
+     }        
+  #timeseries_accumulated{
   	        position: absolute;
             bottom: 0;
-            width:100%;
+            width:30%;
+            right:0;
             height: 200px;
             background-color: rgba(0,0,0,0);
        } 	 

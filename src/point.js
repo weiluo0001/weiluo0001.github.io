@@ -106,10 +106,16 @@
 
       //console.log(math.median(epi_cases));
       var epi_threshold_array = new Array(epi_cases.length);
+
+      if (epi_cases === undefined || epi_cases.length == 0) {
+          epi_cases = 0;
+}
+      console.log(epi_cases);
+      var y_value = epi_threshold_array.fill(math.median(epi_cases)*1.5);
       var epi_threshold = 
            {
               x: epi_date,
-              y: epi_threshold_array.fill(math.median(epi_cases)*1.5),
+              y: y_value,
                mode: 'lines',
                name: 'epidemic threshold',
                line: {

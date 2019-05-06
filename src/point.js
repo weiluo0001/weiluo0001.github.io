@@ -28,7 +28,8 @@
       map.on('click', 'dengue_point', function (e) {
 
       var features = e.features;
-
+      
+      // data processing for different years over one location
       var epi_week = JSON.parse(features[0].properties.CASES).Week;
       var epi_date = JSON.parse(features[0].properties.CASES).Date;
       var epi_year = JSON.parse(features[0].properties.CASES).Year;
@@ -83,15 +84,54 @@
         }
       }
 
-      var layout = {
-                title: features[0].properties.city,
+       var layout_accumulated = {
+                title: "Temporal Accumulation",
                 font: {color: '#5072a8'},
-                margin: {t: 30, b: 50, l: 100, r: 10},
+                margin: {t: 30, b: 50, l: 30, r: 10},
                 plot_bgcolor: '#000000',
                 paper_bgcolor:'#000000',
       };
 
-      Plotly.newPlot('timeseries', multiple_years, layout);
+      // data one time series line for one year
+      var one_place = 
+           {
+              x: epi_date,
+              y: epi_cases,
+              type: 'scatter',
+              name: 'infections'
+            }
+            ;
+
+
+
+      //console.log(math.median(epi_cases));
+      var epi_threshold_array = new Array(epi_cases.length);
+      var epi_threshold = 
+           {
+              x: epi_date,
+              y: epi_threshold_array.fill(math.median(epi_cases)*1.5),
+               mode: 'lines',
+               name: 'epidemic threshold',
+               line: {
+                  dash: 'dashdot',
+                  width: 4
+                }
+              
+            };
+
+
+      var timeseries_left = [one_place,epi_threshold];
+
+      var layout = {
+              title: "Dengue Infections in " + features[0].properties.city,
+              font: {color: '#5072a8'},
+              margin: {t: 30, b: 50, l: 30, r: 10},
+              plot_bgcolor: '#000000',
+              paper_bgcolor:'#000000',
+      };      
+
+      Plotly.newPlot('timeseries', timeseries_left, layout);
+      Plotly.newPlot('timeseries_accumulated', multiple_years, layout_accumulated);
 
 
       })
